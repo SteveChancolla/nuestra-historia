@@ -447,14 +447,17 @@
       }
 
       #brillo-img {
-        width: 260px;
+        width: min(320px, 80vw); /* 🔥 responsive y más grande */
         border-radius: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
 
         opacity: 0;
-        transform: scale(1.1);
+        transform: scale(0.95);
 
-        transition: all 1.5s ease;
+        transition: all 0.8s ease;
+
+        /* ✨ efecto premium */
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
       }
 
       #brillo-text {
@@ -674,6 +677,47 @@
           transform: scale(1);
         }
       }
+
+      #brillo-text {
+        font-size: 24px;
+        max-width: 320px;
+        text-align: center;
+
+        color: #2b2b2b;
+
+        font-weight: 300;
+        line-height: 1.6;
+        letter-spacing: 1px;
+
+        opacity: 1;
+        transform: translateY(30px) scale(0.95);
+
+        transition: all 1s ease;
+
+        /* ✨ glow elegante */
+        text-shadow: 0 2px 10px rgba(255, 255, 255, 0.6);
+
+        /* ✨ fondo glass */
+        background: rgba(255, 255, 255, 0.25);
+        padding: 14px 20px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .show-brillo-text {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      #brillo-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 🔥 centra horizontal */
+        justify-content: center; /* 🔥 centra vertical */
+        text-align: center;
+      }
     </style>
   </head>
 
@@ -701,17 +745,38 @@
     <div class="timeline">
       <div class="container left">
         <div class="content">
-          <h2>🌴 Cancún</h2>
-          <img src="foto1.jpg" />
-          <p>Nuestro primer viaje juntos… inolvidable 💖</p>
+          <h2>Arequipa</h2>
+          <img src="IMG_5484.jpg" />
+          <p>Nuestro primer viaje juntos… inolvidable mi tierra xd💖</p>
         </div>
       </div>
 
       <div class="container right">
         <div class="content">
-          <h2>🏔️ Cusco</h2>
-          <img src="foto2.jpg" />
-          <p>Entre montañas y aventuras 🏞️</p>
+          <h2>España</h2>
+          <img src="IMG_2980.jpg" />
+          <p>Entre montañas, altura y frio 🥶</p>
+        </div>
+      </div>
+      <div class="container left">
+        <div class="content">
+          <h2>San Bartolo</h2>
+          <img src="IMG_9600.jpg" />
+          <p>Nuestro primer Finde en la playa 🌊</p>
+        </div>
+      </div>
+      <div class="container right">
+        <div class="content">
+          <h2>Piura</h2>
+          <img src="IMG_3654.jpg" />
+          <p>Caluroso y Magico Norte ☀️</p>
+        </div>
+      </div>
+      <div class="container left">
+        <div class="content">
+          <h2>San Mateo de Otao</h2>
+          <img src="IMG_5064.jpg" />
+          <p>El mas reciente, cerquita pero especial ⛰️</p>
         </div>
       </div>
     </div>
@@ -750,7 +815,7 @@
 
     <div id="brillo-trigger">
       <button id="runawayBtn" onclick="startBrillo()">
-        ✨ ¿Quieres ver el futuro?
+        ✨ ¿Como seria el futuro, Quieres saber? 
       </button>
     </div>
 
@@ -802,15 +867,15 @@
           const side = index % 2 === 0 ? "left" : "right";
 
           container.innerHTML += `
-      <div class="container ${side}">
-        <div class="content">
-          <span class="moment-date">${item.date}</span>
-          <h2>${item.title}</h2>
-          <img src="${item.img}" alt="${item.title}" class="timeline-img" />
-          <p>${item.text}</p>
+        <div class="container ${side}">
+          <div class="content">
+            <span class="moment-date">${item.date}</span>
+            <h2>${item.title}</h2>
+            <img src="${item.img}" alt="${item.title}" class="timeline-img" />
+            <p>${item.text}</p>
+          </div>
         </div>
-      </div>
-    `;
+      `;
         });
       }
 
@@ -905,12 +970,28 @@
       const perfectaImg = document.getElementById("perfecta-img");
       const perfectaText = document.getElementById("perfecta-text");
 
-      const fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+      const fotos = [
+        "foto2.jpg",
+        "IMG_5064.jpg",
+        "IMG_7195.jpg",
+        "IMG_2769.jpg",
+        "IMG_3550.jpg",
+        "IMG_3628.jpg",
+        "IMG_5381.jpg",
+        "IMG_6196.jpg",
+        "IMG_7185.jpg",
+      ];
 
       const textos = [
         "Eres perfecta para mí 💖",
+        "Contigo siempre dire a todo si",
+        "Y contigo todo tiene sentido ❤️",
         "Tu sonrisa es mi lugar favorito ✨",
-        "Contigo todo tiene sentido ❤️",
+        "Artista y Detallista",
+        "Risueña y Terca",
+        "Comprensiva y Amorosa",
+        "Contigo de la mano ire siempre",
+        "Espero seguir haciendote Feliz",
       ];
 
       let index = 0;
@@ -981,12 +1062,24 @@
       const brilloImg = document.getElementById("brillo-img");
       const brilloText = document.getElementById("brillo-text");
 
-      const fotosBrillo = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+      const fotosBrillo = [
+        "IMG_5710.jpg",
+        "foto1.jpg",
+        "foto2.jpg",
+        "foto3.jpg",
+        "IMG_3955.jpg",
+        "IMG_5454.jpg",
+        "IMG_6196.jpg",
+      ];
 
       const textosBrillo = [
         "Sueño con todos los viajes que nos esperan ✈️",
         "Quiero seguir creciendo contigo 🌱",
         "Nuestro futuro juntos es mi lugar favorito 💛",
+        "Complices Siempre en todo",
+        "Te imaginas nuestros hijos siendo asi?",
+        "Coquetos y  besucones ",
+        "Mientras sigamos juntos no importa el futuro, VOY A DONDE SEA SI ES CONTIGO",
       ];
 
       let brilloIndex = 0;
@@ -1033,20 +1126,19 @@
         brilloText.innerText = textosBrillo[brilloIndex];
 
         brilloImg.style.opacity = "1";
-        brilloText.style.opacity = "1";
+        brilloText.classList.add("show-brillo-text");
 
         brilloIndex++;
 
         function changeSlide() {
-          brilloImg.style.opacity = "0";
-          brilloText.style.opacity = "0";
+          brilloText.classList.remove("show-brillo-text");
 
           setTimeout(() => {
             brilloImg.src = fotosBrillo[brilloIndex];
             brilloText.innerText = textosBrillo[brilloIndex];
 
             brilloImg.style.opacity = "1";
-            brilloText.style.opacity = "1";
+            brilloText.classList.add("show-brillo-text");
 
             brilloIndex = (brilloIndex + 1) % fotosBrillo.length;
           }, 500);
