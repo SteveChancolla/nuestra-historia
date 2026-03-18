@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestra Historia ❤️</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        background: linear-gradient(135deg, #0c3560, #225f9b);
+        color: white;
+        margin: 0;
+      }
+
+      h1 {
+        text-align: center;
+        padding: 30px;
+      }
+
+      h1,
+      h2 {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 0 80px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 77, 109, 0.9),
+          rgba(255, 255, 255, 0.2)
+        );
+        box-shadow: 0 0 20px rgba(255, 77, 109, 0.4);
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 38px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #ff4d6d;
+        box-shadow: 0 0 15px rgba(255, 77, 109, 0.8);
+        z-index: 2;
+      }
+
+      .container.left::before {
+        right: -8px;
+      }
+
+      .container.right::before {
+        left: -8px;
+      }
+
+      .moment-date {
+        display: inline-block;
+        margin-bottom: 12px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(8px);
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: #ffd6de;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .timeline-img {
+        cursor: pointer;
+        transition:
+          transform 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+
+      .timeline-img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+      }
+
+      @media (max-width: 768px) {
+        .timeline::before {
+          left: 18px;
+          transform: none;
+        }
+
+        .container {
+          width: 100%;
+          left: 0 !important;
+          padding-left: 45px;
+          padding-right: 10px;
+        }
+
+        .container.left::before,
+        .container.right::before {
+          left: 10px;
+          right: auto;
+        }
+      }
+
+      .timeline,
+      h1,
+      div,
+      p {
+        position: relative;
+      }
+
+      .container {
+        padding: 20px;
+        position: relative;
+        width: 50%;
+      }
+
+      .container.left {
+        left: -4%;
+      }
+
+      .container.right {
+        left: 50%;
+      }
+
+      .content {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        border-radius: 10px;
+        transition:
+          transform 0.5s,
+          opacity 0.5s;
+        opacity: 0;
+        transform: scale(0.9) translateY(50px);
+      }
+
+      .content img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .show {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      #music-player {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 10px 15px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      #music-player button {
+        border: none;
+        background: #ff4d6d;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* 📱 Mobile */
+      @media (max-width: 600px) {
+        #music-player {
+          left: 50%;
+          transform: translateX(-50%);
+          right: auto;
+          bottom: 15px;
+        }
+      }
+
+      #stars {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        opacity: 0.8;
+        animation: twinkle 2s infinite alternate;
+      }
+
+      @keyframes twinkle {
+        from {
+          opacity: 0.2;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      #hearts {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .heart {
+        position: absolute;
+        color: #ff4d6d;
+        font-size: 20px;
+        animation: floatUp 6s linear infinite;
+      }
+
+      @keyframes floatUp {
+        from {
+          transform: translateY(100vh);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-10vh);
+          opacity: 0;
+        }
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 3;
+
+        background: radial-gradient(
+          circle,
+          transparent 60%,
+          rgba(0, 0, 0, 0.5)
+        );
+      }
+
+      #music-player {
+        z-index: 4;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 100%;
+          left: 0 !important;
+        }
+
+        .container.right {
+          left: 0;
+        }
+
+        .timeline {
+          padding: 0 10px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 22px;
+          padding: 20px 10px;
+        }
+
+        h2 {
+          font-size: 18px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        #music-player {
+          left: 50%;
+          transform: translateX(-50%);
+          right: auto;
+        }
+      }
+
+      #pet {
+        position: fixed;
+        width: 60px;
+        pointer-events: none;
+        z-index: 5;
+
+        left: 0;
+        top: 0;
+
+        transition: transform 0.1s linear;
+      }
+
+      @media (max-width: 768px) {
+        #pet {
+          display: none;
+        }
+      }
+
+      #perfecta-section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+
+        display: none; /* 🔥 CLAVE */
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        opacity: 0;
+        transition: opacity 1s ease;
+
+        z-index: 10;
+      }
+
+      #perfecta-content {
+        text-align: center;
+        animation: fadeIn 1s ease;
+      }
+
+      #perfecta-img {
+        width: 260px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 40px rgba(255, 77, 109, 0.5);
+
+        transform: scale(1.1);
+
+        transition: all 1.5s ease;
+      }
+
+      .show-img {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      #perfecta-text {
+        font-size: 22px;
+        max-width: 300px;
+        margin: auto;
+        line-height: 1.5;
+        font-weight: 300;
+        letter-spacing: 1px;
+        transform: translateY(20px);
+
+        transition: all 1s ease;
+      }
+
+      .show-text {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      #perfecta-section::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, #ff4d6d, transparent);
+        filter: blur(80px);
+        animation: pulse 4s infinite ease-in-out;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+      }
+
+      .beat {
+        animation: beatAnim 1.2s infinite;
+      }
+
+      @keyframes beatAnim {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      #brillo-section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background: radial-gradient(circle, #ffd166, #ff9a8b);
+
+        opacity: 0;
+        transition: opacity 1s ease;
+
+        z-index: 11;
+      }
+
+      #brillo-img {
+        width: 260px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+
+        opacity: 0;
+        transform: scale(1.1);
+
+        transition: all 1.5s ease;
+      }
+
+      #brillo-text {
+        font-size: 22px;
+        max-width: 300px;
+        text-align: center;
+        color: #333;
+
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+      }
+
+      .glow {
+        animation: glowAnim 2s infinite alternate;
+      }
+
+      @keyframes glowAnim {
+        from {
+          filter: brightness(1);
+        }
+        to {
+          filter: brightness(1.2);
+        }
+      }
+
+      #brillo-trigger {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 80px 0;
+      }
+
+      #runawayBtn {
+        position: relative; /* 🔥 ya no fixed */
+        padding: 16px 28px;
+        border-radius: 40px;
+        border: none;
+        background: linear-gradient(135deg, #ffd166, #ff9a8b);
+        color: #333;
+        font-size: 16px;
+        cursor: pointer;
+
+        transition: all 0.3s ease;
+      }
+      #closeBrillo {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        width: 40px;
+        height: 40px;
+
+        border-radius: 50%;
+        border: none;
+
+        background: rgba(255, 255, 255, 0.15);
+        color: #333;
+
+        font-size: 18px;
+        cursor: pointer;
+
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+
+      #closeBrillo:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+      }
+
+      #perfectaBtn {
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        padding: 14px 26px;
+        border-radius: 40px;
+        border: none;
+
+        background: linear-gradient(135deg, #ff4d6d, #ff758f);
+        color: white;
+        font-size: 16px;
+
+        cursor: pointer;
+
+        box-shadow: 0 10px 30px rgba(255, 77, 109, 0.4);
+        backdrop-filter: blur(10px);
+
+        transition: all 0.3s ease;
+        z-index: 5;
+      }
+
+      #perfectaBtn:hover {
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 15px 40px rgba(255, 77, 109, 0.6);
+      }
+
+      #lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.35s ease,
+          visibility 0.35s ease;
+        z-index: 30;
+      }
+
+      #lightbox.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #lightbox-img {
+        max-width: 88%;
+        max-height: 88%;
+        border-radius: 18px;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.12);
+        transform: scale(0.9);
+        transition: transform 0.35s ease;
+      }
+
+      #lightbox.show #lightbox-img {
+        transform: scale(1);
+      }
+
+      #lightbox-close {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        font-size: 28px;
+        color: white;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.12);
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+      }
+
+      #intro-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background:
+          radial-gradient(
+            circle at center,
+            rgba(34, 95, 155, 0.25),
+            transparent 40%
+          ),
+          linear-gradient(135deg, #041826, #0c3560, #225f9b);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        transition:
+          opacity 1s ease,
+          visibility 1s ease;
+      }
+
+      #intro-screen.hide {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      #intro-content {
+        padding: 30px;
+        animation: introZoom 1.6s ease;
+      }
+
+      .intro-small {
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.85;
+        margin-bottom: 10px;
+      }
+
+      #intro-title {
+        font-size: clamp(30px, 6vw, 56px);
+        margin: 0 0 25px;
+        text-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
+      }
+
+      #enter-btn {
+        padding: 14px 28px;
+        border: none;
+        border-radius: 40px;
+        background: linear-gradient(135deg, #ff4d6d, #ff758f);
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(255, 77, 109, 0.35);
+        transition: transform 0.3s ease;
+      }
+
+      #enter-btn:hover {
+        transform: scale(1.06);
+      }
+
+      @keyframes introZoom {
+        from {
+          opacity: 0;
+          transform: scale(1.08);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="stars"></div>
+    <div id="hearts"></div>
+
+    <audio id="music" loop>
+      <source src="brasil.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="music-player">
+      <button id="playBtn">▶</button>
+      <span>Nuestra canción 💖</span>
+    </div>
+
+    <div>
+      <h1>❤️ Nuestra Historia ❤️</h1>
+    </div>
+
+    <div class="timeline" id="timeline"></div>
+
+    <h1>✈️ Nuestros Viajes</h1>
+
+    <div class="timeline">
+      <div class="container left">
+        <div class="content">
+          <h2>🌴 Cancún</h2>
+          <img src="foto1.jpg" />
+          <p>Nuestro primer viaje juntos… inolvidable 💖</p>
+        </div>
+      </div>
+
+      <div class="container right">
+        <div class="content">
+          <h2>🏔️ Cusco</h2>
+          <img src="foto2.jpg" />
+          <p>Entre montañas y aventuras 🏞️</p>
+        </div>
+      </div>
+    </div>
+    <div id="perfecta-section">
+      <div id="perfecta-content">
+        <img id="perfecta-img" src="" />
+        <p id="perfecta-text">Eres perfecta para mí 💖</p>
+      </div>
+      <br />
+      <br />
+      <button
+        onclick="stopPerfecta()"
+        style="
+          margin-top: 20px;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          backdrop-filter: blur(10px);
+        "
+      >
+        ✖ Cerrar
+      </button>
+    </div>
+
+    <button id="perfectaBtn" onclick="startPerfecta()">💖 Perfecta</button>
+    <div id="brillo-section">
+      <div id="brillo-content">
+        <img id="brillo-img" src="" />
+        <p id="brillo-text">Lo mejor aún está por venir ✨</p>
+      </div>
+
+      <button id="closeBrillo" onclick="stopBrillo()">✕</button>
+    </div>
+
+    <div id="brillo-trigger">
+      <button id="runawayBtn" onclick="startBrillo()">
+        ✨ ¿Quieres ver el futuro?
+      </button>
+    </div>
+
+    <div style="text-align: center; padding: 50px">
+      <h2>💌 Para ti</h2>
+      <p>
+        Gracias por cada momento, cada risa y cada aventura. Este es solo el
+        comienzo de todo lo que nos queda por vivir ❤️
+      </p>
+    </div>
+    <div id="lightbox">
+      <span id="lightbox-close">✕</span>
+      <img id="lightbox-img" src="" alt="Foto ampliada" />
+    </div>
+
+    <script>
+      const momentos = [
+        {
+          date: "Feb 2024",
+          title: "Primer día",
+          img: "foto1.jpg",
+          text: "Cuando nos conocimos 💫",
+        },
+        {
+          date: "Abr 2024",
+          title: "Primer viaje",
+          img: "foto2.jpg",
+          text: "Un momento inolvidable ✈️",
+        },
+        {
+          date: "Ago 2024",
+          title: "Hoy",
+          img: "foto3.jpg",
+          text: "Siguiendo juntos ❤️",
+        },
+        {
+          date: "Dic 2024",
+          title: "Nueva aventura",
+          img: "foto4.jpg",
+          text: "Un recuerdo más contigo 💖",
+        },
+      ];
+
+      function renderTimeline() {
+        const container = document.getElementById("timeline");
+        container.innerHTML = "";
+
+        momentos.forEach((item, index) => {
+          const side = index % 2 === 0 ? "left" : "right";
+
+          container.innerHTML += `
+      <div class="container ${side}">
+        <div class="content">
+          <span class="moment-date">${item.date}</span>
+          <h2>${item.title}</h2>
+          <img src="${item.img}" alt="${item.title}" class="timeline-img" />
+          <p>${item.text}</p>
+        </div>
+      </div>
+    `;
+        });
+      }
+
+      function initScrollAnimation() {
+        const elements = document.querySelectorAll(".content");
+
+        const revealOnScroll = () => {
+          elements.forEach((el) => {
+            const position = el.getBoundingClientRect().top;
+            if (position < window.innerHeight - 100) {
+              el.classList.add("show");
+            }
+          });
+        };
+
+        revealOnScroll();
+        window.addEventListener("scroll", revealOnScroll);
+      }
+
+      function playMusic() {
+        const audio = document.getElementById("music");
+        audio.play();
+      }
+
+      document.addEventListener(
+        "click",
+        () => {
+          const audio = document.getElementById("music");
+          audio.play();
+        },
+        { once: true },
+      );
+
+      const audio = document.getElementById("music");
+      const btn = document.getElementById("playBtn");
+
+      let isPlaying = false;
+
+      audio.volume = 0.08;
+
+      function fadeIn(audio) {
+        let vol = 0.05;
+        const interval = setInterval(() => {
+          if (vol < 0.4) {
+            vol += 0.02;
+            audio.volume = vol;
+          } else {
+            clearInterval(interval);
+          }
+        }, 200);
+      }
+
+      btn.addEventListener("click", () => {
+        if (!isPlaying) {
+          audio.play();
+          fadeIn(audio);
+          btn.innerHTML = "⏸️";
+        } else {
+          audio.pause();
+          btn.innerHTML = "▶️";
+        }
+        isPlaying = !isPlaying;
+      });
+
+      const starsContainer = document.getElementById("stars");
+
+      for (let i = 0; i < 60; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.animationDuration = Math.random() * 3 + 2 + "s";
+        starsContainer.appendChild(star);
+      }
+
+      const heartsContainer = document.getElementById("hearts");
+
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.fontSize = Math.random() * 10 + 15 + "px";
+
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+      }, 500);
+
+      const perfectaSection = document.getElementById("perfecta-section");
+      const perfectaImg = document.getElementById("perfecta-img");
+      const perfectaText = document.getElementById("perfecta-text");
+
+      const fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+
+      const textos = [
+        "Eres perfecta para mí 💖",
+        "Tu sonrisa es mi lugar favorito ✨",
+        "Contigo todo tiene sentido ❤️",
+      ];
+
+      let index = 0;
+      let slideshowInterval;
+
+      function startPerfecta() {
+        const audio = document.getElementById("music");
+
+        audio.src = "perfecta.mp3";
+        audio.play();
+
+        perfectaSection.style.display = "flex";
+
+        setTimeout(() => {
+          perfectaSection.style.opacity = "1";
+        }, 50);
+
+        perfectaSection.classList.add("beat");
+
+        startSlideshow();
+      }
+
+      function startSlideshow() {
+        index = 0;
+
+        // 👇 FORZAR PRIMER RENDER visible
+        perfectaImg.src = fotos[index];
+        perfectaText.innerText = textos[index];
+
+        perfectaImg.classList.add("show-img");
+        perfectaText.classList.add("show-text");
+
+        index++;
+
+        function changeSlide() {
+          perfectaImg.classList.remove("show-img");
+          perfectaText.classList.remove("show-text");
+
+          setTimeout(() => {
+            perfectaImg.src = fotos[index];
+            perfectaText.innerText = textos[index];
+
+            perfectaImg.classList.add("show-img");
+            perfectaText.classList.add("show-text");
+
+            index = (index + 1) % fotos.length;
+          }, 500);
+        }
+
+        slideshowInterval = setInterval(changeSlide, 4000);
+      }
+
+      function stopPerfecta() {
+        perfectaSection.style.opacity = "0";
+
+        setTimeout(() => {
+          perfectaSection.style.display = "none";
+        }, 800);
+
+        clearInterval(slideshowInterval);
+
+        const audio = document.getElementById("music");
+        audio.src = "brasil.mp3";
+        audio.play();
+      }
+
+      const brilloSection = document.getElementById("brillo-section");
+      const brilloImg = document.getElementById("brillo-img");
+      const brilloText = document.getElementById("brillo-text");
+
+      const fotosBrillo = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+
+      const textosBrillo = [
+        "Sueño con todos los viajes que nos esperan ✈️",
+        "Quiero seguir creciendo contigo 🌱",
+        "Nuestro futuro juntos es mi lugar favorito 💛",
+      ];
+
+      let brilloIndex = 0;
+      let brilloInterval;
+
+      function startBrillo() {
+        const audio = document.getElementById("music");
+
+        audio.src = "brillo.mp3";
+        audio.play();
+
+        brilloSection.style.display = "flex";
+
+        setTimeout(() => {
+          brilloSection.style.opacity = "1";
+        }, 50);
+
+        startBrilloSlideshow();
+      }
+
+      const btnRun = document.getElementById("runawayBtn");
+      const originalBtnStyle = {
+        position: btnRun.style.position || "relative",
+        left: btnRun.style.left || "",
+        top: btnRun.style.top || "",
+        zIndex: btnRun.style.zIndex || "",
+      };
+
+      function resetRunawayButton() {
+        btnRun.style.position = originalBtnStyle.position;
+        btnRun.style.left = originalBtnStyle.left;
+        btnRun.style.top = originalBtnStyle.top;
+        btnRun.style.zIndex = originalBtnStyle.zIndex;
+
+        attempts = 0; // opcional: reinicia el juego
+        btnRun.innerText = "✨ ¿Quieres ver el futuro?";
+      }
+
+      function startBrilloSlideshow() {
+        brilloIndex = 0;
+        btnRun.style.zIndex = "0";
+
+        brilloImg.src = fotosBrillo[brilloIndex];
+        brilloText.innerText = textosBrillo[brilloIndex];
+
+        brilloImg.style.opacity = "1";
+        brilloText.style.opacity = "1";
+
+        brilloIndex++;
+
+        function changeSlide() {
+          brilloImg.style.opacity = "0";
+          brilloText.style.opacity = "0";
+
+          setTimeout(() => {
+            brilloImg.src = fotosBrillo[brilloIndex];
+            brilloText.innerText = textosBrillo[brilloIndex];
+
+            brilloImg.style.opacity = "1";
+            brilloText.style.opacity = "1";
+
+            brilloIndex = (brilloIndex + 1) % fotosBrillo.length;
+          }, 500);
+        }
+
+        brilloInterval = setInterval(changeSlide, 4000);
+      }
+
+      function stopBrillo() {
+        brilloSection.style.opacity = "0";
+
+        setTimeout(() => {
+          brilloSection.style.display = "none";
+        }, 800);
+
+        clearInterval(brilloInterval);
+
+        const audio = document.getElementById("music");
+        audio.src = "brasil.mp3";
+        audio.play();
+
+        resetRunawayButton();
+      }
+
+      function initLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const closeBtn = document.getElementById("lightbox-close");
+
+        document.addEventListener("click", (e) => {
+          if (e.target.classList.contains("timeline-img")) {
+            lightboxImg.src = e.target.src;
+            lightbox.classList.add("show");
+          }
+        });
+
+        closeBtn.addEventListener("click", () => {
+          lightbox.classList.remove("show");
+        });
+
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox) {
+            lightbox.classList.remove("show");
+          }
+        });
+      }
+
+      let attempts = 0;
+
+      function initIntro() {
+        const intro = document.getElementById("intro-screen");
+        const enterBtn = document.getElementById("enter-btn");
+        const audio = document.getElementById("music");
+
+        enterBtn.addEventListener("click", () => {
+          intro.classList.add("hide");
+          audio.play().catch(() => {});
+        });
+      }
+
+      btnRun.addEventListener("mouseenter", () => {
+        attempts++;
+
+        if (attempts > 8) {
+          btnRun.innerText = "✨ Está bien… ven 💛";
+          return;
+        }
+
+        const maxX = window.innerWidth - btnRun.offsetWidth;
+        const maxY = window.innerHeight - btnRun.offsetHeight;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        btnRun.style.left = randomX + "px";
+        btnRun.style.top = randomY + "px";
+        btnRun.style.position = "fixed";
+        btnRun.style.zIndex = "9999";
+      });
+
+      btnRun.addEventListener("touchstart", () => {
+        const maxX = window.innerWidth - btnRun.offsetWidth;
+        const maxY = window.innerHeight - btnRun.offsetHeight;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        btnRun.style.left = randomX + "px";
+        btnRun.style.top = randomY + "px";
+        btnRun.style.position = "fixed";
+        btnRun.style.zIndex = "9999";
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderTimeline();
+        initScrollAnimation();
+        initLightbox();
+        initIntro();
+      });
+    </script>
+  </body>
+
+  <div id="intro-screen">
+    <div id="intro-content">
+      <p class="intro-small">Para la persona más especial de mi vida</p>
+      <h1 id="intro-title">Nuestra Historia ❤️</h1>
+      <button id="enter-btn">Entrar</button>
+    </div>
+  </div>
+</html>
